@@ -731,6 +731,65 @@ ul {
 .hero-content .btn { transition-delay: 0.4s; }
 
 /* ==========================================================================
+   Profile / 自己紹介ページ
+   ========================================================================== */
+
+/* ページ全体を画面いっぱいに使い、カードを中央に配置する */
+.profile-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg);
+  padding: 2rem;
+}
+
+/* 自己紹介の内容をまとめたカード */
+.profile-card {
+  width: 100%;
+  max-width: 400px;
+  background: var(--color-cream);
+  border-radius: 12px;
+  box-shadow: 0 20px 45px -22px rgba(43, 36, 32, 0.3);
+  padding: 3rem 2.5rem;
+  text-align: center;
+}
+
+/* プロフィール写真の代わりとなるイニシャル入りの円形アバター */
+.profile-avatar {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 1.75rem;
+  border-radius: 50%;
+  background: var(--color-accent);
+  color: var(--color-cream);
+  font-family: var(--font-serif);
+  font-size: 2.6rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-name {
+  font-family: var(--font-jp);
+  font-weight: 500;
+  font-size: 1.6rem;
+  color: var(--color-ink);
+}
+
+.profile-title {
+  margin-top: 0.5rem;
+  color: var(--color-ink-soft);
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+}
+
+.profile-back {
+  margin-top: 2.2rem;
+}
+
+/* ==========================================================================
    Responsive
    ========================================================================== */
 
