@@ -108,6 +108,70 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* ---------------------------------------------------------
+     Contact form validation
+  --------------------------------------------------------- */
+  const contactForm = document.getElementById('contactForm');
+
+  if (contactForm) {
+    const nameInput = document.getElementById('contactName');
+    const emailInput = document.getElementById('contactEmail');
+    const messageInput = document.getElementById('contactMessage');
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    const fields = [
+      {
+        input: nameInput,
+        errorEl: document.getElementById('contactNameError'),
+        validate: (value) => (value.trim() === '' ? 'お名前を入力してください。' : ''),
+      },
+      {
+        input: emailInput,
+        errorEl: document.getElementById('contactEmailError'),
+        validate: (value) => {
+          if (value.trim() === '') return 'メールアドレスを入力してください。';
+          if (!emailPattern.test(value.trim())) return 'メールアドレスの形式が正しくありません。';
+          return '';
+        },
+      },
+      {
+        input: messageInput,
+        errorEl: document.getElementById('contactMessageError'),
+        validate: (value) => (value.trim() === '' ? 'お問い合わせ内容を入力してください。' : ''),
+      },
+    ];
+
+    function validateField(field) {
+      const message = field.validate(field.input.value);
+      field.errorEl.textContent = message;
+      field.input.classList.toggle('invalid', Boolean(message));
+      return message === '';
+    }
+
+    fields.forEach((field) => {
+      field.input.addEventListener('blur', () => validateField(field));
+      field.input.addEventListener('input', () => {
+        if (field.input.classList.contains('invalid')) {
+          validateField(field);
+        }
+      });
+    });
+
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const isValid = fields.reduce((valid, field) => validateField(field) && valid, true);
+      if (!isValid) return;
+
+      alert('送信しました');
+      contactForm.reset();
+      fields.forEach((field) => {
+        field.errorEl.textContent = '';
+        field.input.classList.remove('invalid');
+      });
+    });
+  }
+
+  /* ---------------------------------------------------------
      Subtle parallax on hero background
   --------------------------------------------------------- */
   const heroBg = document.querySelector('.hero-bg');
